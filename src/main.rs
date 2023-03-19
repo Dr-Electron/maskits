@@ -1,13 +1,12 @@
-// main.rs
-
-use dioxus::{prelude::{*, dioxus_elements::{button, img}}, events::onclick};
+#![allow(non_snake_case)]
+use dioxus::prelude::*;
 
 fn main() {
-    dioxus::web::launch(app);
+    dioxus_web::launch(App);
 }
 
-fn app(cx: Scope) -> Element {
-    cx.render(rsx!{
+fn App(cx: Scope) -> Element {
+    cx.render(rsx! {
         div { "hello, wasm!" }
         div {
             input { placeholder: "What needs to be done?" }
