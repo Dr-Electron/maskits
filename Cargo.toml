@@ -8,3 +8,7 @@ edition = "2021"
 [dependencies]
 dioxus = "0.3.2"
 dioxus-web = "0.3.1"
+iota-client = "2.0.1-rc.7"
+log = "0.4.17"
+tokio = { version = "1.27.0", features = ["macros", "rt"] }
+wasm-logger = "0.2.0"

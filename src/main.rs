@@ -1,8 +1,26 @@
-#![allow(non_snake_case)]
 // import the prelude to get access to the `rsx!` macro and the `Scope` and `Element` types
 use dioxus::prelude::*;
+use iota_client::Client;
 
-fn main() {
+use crate::nft::mint_nft;
+
+mod nft;
+
+#[tokio::main(flavor = "current_thread")]
+async fn main() {
+    wasm_logger::init(wasm_logger::Config::default());
+
+    let client = Client::builder()
+        .with_node("https://api.testnet.shimmer.network")
+        .unwrap()
+        .finish()
+        .unwrap();
+
+    // Get node info.
+    let info = client.get_info().await.unwrap();
+
+    log::info!("{info:#?}");
+
     // launch the web app
     dioxus_web::launch(App);
 }
@@ -94,6 +112,7 @@ fn App(cx: Scope) -> Element {
                             class: "text-white font-semibold w-full py-4 border-4",
                             border_color: "#A5B08D",
                             background_color: "#B5C299",
+                            onclick: move |_| mint_nft(),
                             "MINT"
                         }
                     }
